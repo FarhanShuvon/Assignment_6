@@ -52,34 +52,60 @@
     </header>
 
     <main>
-        <div>
-            <div class="min-h-screen p-6">
-                <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Choose Your Trees</h1>
-
-                <div class="flex gap-8 max-w-7xl mx-auto">
-                    <!-- Categories Sidebar -->
-                    <div class="w-64 bg-white rounded-lg shadow-lg overflow-hidden">
-                        <h2 class="text-lg font-semibold text-gray-800 p-4 border-b bg-gray-50">Categories</h2>
-                        <ul id="category-container">
-                            <li class="px-4 py-3 text-gray-500 italic">Loading categories...</li>
-                        </ul>
-                    </div>
-
-                    <!-- Main Content Area -->
-                    <div class="flex-1">
-                        <!-- Spinner -->
-                        <div id="spinner" class="flex justify-center items-center py-20 hidden">
-                            <div class="spinner"></div>
-                        </div>
-
-                        <!-- Plants Grid -->
-                        <div id="plants-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <!-- Plants will be populated by JavaScript -->
-                        </div>
-                    </div>
+        <div class="min-h-screen p-6">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Choose Your Trees</h1>
+            
+            <div class="flex gap-8 max-w-7xl mx-auto">
+              <!-- Categories Sidebar -->
+              <div class="w-64 bg-white rounded-lg shadow-lg overflow-hidden">
+                <h2 class="text-lg font-semibold text-gray-800 p-4 border-b bg-gray-50">Categories</h2>
+                <ul id="category-container">
+                  <li class="px-4 py-3 text-gray-500 italic">Loading categories...</li>
+                </ul>
+              </div>
+        
+              <!-- Main Content Area -->
+              <div class="flex-1">
+                <!-- Spinner -->
+                <div id="spinner" class="flex justify-center items-center py-20 hidden">
+                  <div class="spinner"></div>
                 </div>
+                
+                <!-- Plants Grid -->
+                <div id="plants-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-max">
+                  <!-- Plants will be populated by JavaScript -->
+                </div>
+              </div>
+        
+              <!-- Cart Sidebar -->
+              <div class="w-64 bg-white rounded-lg shadow-lg overflow-hidden h-fit">
+                <!-- Cart Header -->
+                <div class="p-4 border-b">
+                  <h2 class="text-lg font-semibold text-gray-800">Your Cart</h2>
+                </div>
+                
+                <!-- Cart Items -->
+                <div id="cart-items" class="p-4">
+                  <!-- Cart items will be populated by JavaScript -->
+                </div>
+                
+                <!-- Cart Total -->
+                <div class="px-4 pb-4">
+                  <div class="flex justify-between items-center">
+                    <span class="text-lg font-semibold text-gray-800">Total:</span>
+                    <span id="cart-total" class="text-xl font-bold text-gray-800">৳0</span>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
+        
+          <!-- Plant Details Modal -->
+          <div id="plant-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div id="modal-content">
+              <!-- Modal content will be populated by JavaScript -->
+            </div>
+          </div>
         <div>
             <section class="align-items-center text-center mt-12">
                 <h1 class="font-semibold text-3xl">About the Campaign</h1>
