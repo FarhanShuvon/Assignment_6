@@ -1,7 +1,5 @@
-// Cart array to store items
 let cart = [];
 
-// Spinner management
 const manageSpinner = (status) => {
   if (status == true) {
     document.getElementById("spinner").classList.remove("hidden");
@@ -12,7 +10,6 @@ const manageSpinner = (status) => {
   }
 };
 
-// Load plant details and show modal
 const loadPlantDetails = async (plantId) => {
   try {
     const response = await fetch(`https://openapi.programming-hero.com/api/plant/${plantId}`);
@@ -28,23 +25,19 @@ const loadPlantDetails = async (plantId) => {
   }
 };
 
-// Show plant details in modal
 const showPlantModal = (plant) => {
   const modal = document.getElementById("plant-modal");
   const modalContent = document.getElementById("modal-content");
   
   modalContent.innerHTML = `
     <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-      <!-- Modal Header -->
       <div class="flex justify-between items-center p-6 border-b">
         <h2 class="text-2xl font-bold text-gray-800">${plant.name}</h2>
         <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-3xl">×</button>
       </div>
       
-      <!-- Modal Body -->
       <div class="p-6">
         <div class="grid md:grid-cols-2 gap-6">
-          <!-- Plant Image -->
           <div class="bg-gray-100 rounded-lg overflow-hidden">
             <img src="${plant.image}" alt="${plant.name}" 
                  class="w-full h-64 object-cover"
@@ -57,7 +50,6 @@ const showPlantModal = (plant) => {
             </div>
           </div>
           
-          <!-- Plant Details -->
           <div class="space-y-4">
             <div>
               <h3 class="font-semibold text-gray-800 mb-2">Category</h3>
@@ -78,7 +70,6 @@ const showPlantModal = (plant) => {
           </div>
         </div>
         
-        <!-- Add to Cart Button -->
         <div class="mt-6 flex justify-center">
           <button onclick="addToCart('${plant.name.replace(/'/g, "\\'")}', ${plant.price}); closeModal();" 
                   class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full transition-colors duration-200">
@@ -90,17 +81,15 @@ const showPlantModal = (plant) => {
   `;
   
   modal.classList.remove("hidden");
-  document.body.style.overflow = "hidden"; // Prevent background scrolling
+  document.body.style.overflow = "hidden";
 };
 
-// Close modal
 const closeModal = () => {
   const modal = document.getElementById("plant-modal");
   modal.classList.add("hidden");
-  document.body.style.overflow = "auto"; // Restore scrolling
+  document.body.style.overflow = "auto";
 };
 
-// Display plants in grid - Updated with click handlers
 const displayPlants = (plants) => {
   const plantsContainer = document.getElementById("plants-container");
   plantsContainer.innerHTML = "";
@@ -148,7 +137,6 @@ const displayPlants = (plants) => {
       </div>
     `;
     
-    // Add click handler to the entire card
     plantCard.onclick = () => loadPlantDetails(plant.id);
     
     plantsContainer.appendChild(plantCard);
@@ -157,7 +145,6 @@ const displayPlants = (plants) => {
   manageSpinner(false);
 };
 
-// Add item to cart
 const addToCart = (name, price) => {
   const existingItem = cart.find(item => item.name === name);
   
@@ -171,14 +158,12 @@ const addToCart = (name, price) => {
   console.log(`Added to cart: ${name} - ৳${price}`);
 };
 
-// Remove item from cart
 const removeFromCart = (name) => {
   cart = cart.filter(item => item.name !== name);
   updateCartDisplay();
   console.log(`Removed from cart: ${name}`);
 };
 
-// Update cart display
 const updateCartDisplay = () => {
   const cartItems = document.getElementById("cart-items");
   const cartTotal = document.getElementById("cart-total");
@@ -219,7 +204,6 @@ const updateCartDisplay = () => {
   cartTotal.textContent = `৳${total}`;
 };
 
-// Load all plants by default
 const loadAllPlants = () => {
   manageSpinner(true);
   
@@ -235,7 +219,6 @@ const loadAllPlants = () => {
     });
 };
 
-// Load plants by category
 const loadCategoryPlants = (categoryId, categoryName) => {
   manageSpinner(true);
   
@@ -256,7 +239,6 @@ const loadCategoryPlants = (categoryId, categoryName) => {
     });
 };
 
-// Utility function - remove active class from all categories
 const removeActive = () => {
   const categoryButtons = document.querySelectorAll(".category-item");
   categoryButtons.forEach((btn) => {
@@ -265,7 +247,6 @@ const removeActive = () => {
   });
 };
 
-// Load and display categories
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/categories")
     .then((res) => res.json())
@@ -282,7 +263,6 @@ const loadCategories = () => {
     });
 };
 
-// Handle category click
 const loadCategoryTrees = (id, categoryName) => {
   removeActive();
   const clickBtn = document.getElementById(`category-btn-${id}`);
@@ -298,7 +278,6 @@ const loadCategoryTrees = (id, categoryName) => {
   }
 };
 
-// Display categories in sidebar
 const displayCategories = (categories) => {
   const categoryContainer = document.getElementById("category-container");
   categoryContainer.innerHTML = "";
@@ -321,12 +300,10 @@ const displayCategories = (categories) => {
   }
 };
 
-// Initialize
 loadCategories();
 loadAllPlants();
 updateCartDisplay();
 
-// Close modal when clicking outside
 window.onclick = (event) => {
   const modal = document.getElementById("plant-modal");
   if (event.target === modal) {
